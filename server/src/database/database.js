@@ -36,10 +36,10 @@ const startDatabase = async () => {
     }
     //Pool principal, que se conecta ao banco de dados de usuários
     const mainPool = new Pool({
-      user: process.env.DB_USER,
-      host: process.env.DB_HOST,
-      database: process.env.DB_NAME,
-      password: process.env.DB_PASSWORD,
+      user: process.env.USER,
+      host: process.env.HOST,
+      database: process.env.DATABASE,
+      password: process.env.PASSWORD,
       port: process.env.PORT,
       });
     //Script de verificação da existencia da tabela 'users'
