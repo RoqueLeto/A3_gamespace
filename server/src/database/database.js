@@ -5,11 +5,11 @@ require("dotenv").config({ debug: true });
 
 //Pool inicial
 const pool = new Pool({
-  user: process.env.DB_USER,
-  host: process.env.DB_HOST,
-  database: process.env.DB_NAME,
-  password: process.env.DB_PASSWORD,
-  port: 5432,
+   user: process.env.BRIDGE_DB_USER,
+   host: process.env.DB_HOST,
+   database: 'postgres',
+   password: process.env.BRIDGE_DB_PASSWORD,
+   port: process.env.PORT,
 });
 
 //Scripts do banco de dados
@@ -37,14 +37,14 @@ const startDatabase = async () => {
     //Pool principal, que se conecta ao banco de dados de usuários
     const mainPool = new Pool({
       user: process.env.DB_USER,
-      password: process.env.DB_PASSWORD,
       host: process.env.DB_HOST,
-      port: process.env.DB_PORT,
-      database: process.env.DB_MAIN_NAME,
-    });
+      database: process.env.DB_NAME,
+      password: process.env.DB_PASSWORD,
+      port: process.env.PORT,
+      });
     //Script de verificação da existencia da tabela 'users'
-    let tableVerify = await pool.query(
-      "SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE LOWER(TABLE_NAME) = LOWER('users')"
+    let tableVerify = await mainPool.query(
+    "SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE LOWER(TABLE_NAME) = LOWER('users')"
     );
     //Condição para que a tabela 'users' seja criada
     if (tableVerify.rows.length == 0) {
