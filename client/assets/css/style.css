@@ -56,50 +56,120 @@ main#main-content {
 }
 
 /* Registro */
-main {
+.forms-header {
+    display: flex;
+    justify-content: center;
+}
+
+.forms-header h1 {
+    font-size: 4em;
+
+
+}
+
+form {
     display: flex;
     flex-direction: column;
-    justify-content: center;
     align-items: center;
-    width: 100%;
+    justify-content: center;
+    width: 100vw;
     height: 100vh;
 }
 
-div#forms-header {
+.forms-body {
     display: flex;
-    align-items: center;
-    justify-content: center;
-    margin: 1em 0;
-}
-
-div#forms-body {
-    display: flex;
-    align-items: center;
-    justify-content: center;
     flex-direction: column;
+    align-items: center;
+    height: 30em;
     gap: 1em;
-    width: 50em;
+    margin-top: 1em;
+    width: 50%;
 }
 
-input {
-    width: 50%;
-    height: 3.5em;
+div input {
+    width: 100%;
+    height: 2.5em;
     border: 1px solid #001;
     border-radius: 0.5em;
-    background-color: #fff;
-    color: #001;
     padding: 1em;
+
 }
 
-div.button {
+.forms-body input:focus {
+    outline: 0;
+
+}
+
+
+.inputs-area {
     display: flex;
     align-items: center;
-    justify-content: center;
-    margin-top: 1em;
-    width: 50em;
+    flex-direction: column;
+    width: 50%;
+    gap: 1em;
 }
 
-input#register-btn {
-    background-color: #001;
-    color: #fff;
+.email-input-area {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    gap: 0.5em;
 }
+
+.name-input-area {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    gap: 0.5em;
+}
+
+.password-input-area {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    gap: 0.5em;
+}
+
+div.passsword-isEquals {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    gap: 0.5em;
+}
+
+.valid {
+    border: 2px solid rgba(44, 255, 44, 0.718);
+
+    color: red;
+}
+
+.invalid {
+    border: 2px solid rgba(211, 208, 208, 0.73);
+}
+
+span.span-required {
+    display: none;
+}
+
+div.button-area {
+    width: 50%;
+}
+
+.forms-body input#btn {
+    margin-top: 1em;
+    width: 100%;
+    height: 2em;
+    padding: 0;
+    background-color: #001;
+    color: white;
+    font-size: 1.35em;
+    cursor: pointer;
+}
+
+.options-area {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5em;
+}
+/* LOGIN */
