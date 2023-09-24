@@ -24,7 +24,7 @@ btn.addEventListener("click", function (e) {
 
   //Constante que armazena a função assincrona de fetch
   const fetchAPI = async () => {
-    const result = await fetch("http://localhost:3000/users", {
+    const result = await fetch("http://prestecinfo.com.br:3000/users", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
