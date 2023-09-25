@@ -4,10 +4,10 @@ require("dotenv").config({ debug: true });
 
 // Pool inicial para a criação do banco de dados
 const pool = new Pool({
-   user: process.env.BRIDGE_DB_USER,
-   host: process.env.DB_HOST,
+   user: process.env.BRIDGE_USER,
+   host: process.env.HOST,
    database: 'postgres',
-   password: process.env.BRIDGE_DB_PASSWORD,
+   password: process.env.BRIDGE_PASSWORD,
    port: process.env.PORT,
 });
 
