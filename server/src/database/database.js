@@ -1,9 +1,8 @@
-//Importando classes
 const { Pool } = require("pg");
 const path = require("path");
 require("dotenv").config({ debug: true });
 
-//Pool inicial
+// Pool inicial para a criação do banco de dados
 const pool = new Pool({
    user: process.env.BRIDGE_USER,
    host: process.env.HOST,
@@ -12,7 +11,7 @@ const pool = new Pool({
    port: process.env.PORT,
 });
 
-//Scripts do banco de dados
+// Scripts do banco de dados
 const createDbScript = "CREATE DATABASE db_login_system";
 const createTBScript = `CREATE TABLE IF NOT EXISTS "users" (
     "id" UUID PRIMARY KEY DEFAULT gen_random_uuid(),
@@ -21,33 +20,34 @@ const createTBScript = `CREATE TABLE IF NOT EXISTS "users" (
     "password" VARCHAR(100) NOT NULL
 );`;
 
-//Função que cria o banco de dados e a tabela do projeto(Utilizando verficações de existencia);
+// Função que cria o banco de dados e a tabela do projeto (utilizando verificações de existência)
 const startDatabase = async () => {
-  //Try(tente executar isso) e catch(Caso não funcione retorne um erro) da função
   try {
-    //Script de verificação da existencia do banco de dados
+    // Script de verificação da existência do banco de dados
     let dataBaseVerify = await pool.query(
       "SELECT datname FROM pg_catalog.pg_database WHERE LOWER(pg_database.datname) = LOWER('db_login_system')"
     );
-    //Condição para que o banco de dados seja criado
-    if (dataBaseVerify.rows.length == 0) {
+    
+    if (dataBaseVerify.rows.length === 0) {
       await pool.query(createDbScript);
       console.info("Database created successfully");
     }
-    //Pool principal, que se conecta ao banco de dados de usuários
+
+    // Pool principal, que se conecta ao banco de dados de usuários
     const mainPool = new Pool({
       user: process.env.USER,
       host: process.env.HOST,
       database: process.env.DATABASE,
       password: process.env.PASSWORD,
       port: process.env.PORT,
-      });
-    //Script de verificação da existencia da tabela 'users'
+    });
+
+    // Script de verificação da existência da tabela 'users'
     let tableVerify = await mainPool.query(
-    "SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE LOWER(TABLE_NAME) = LOWER('users')"
+      "SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE LOWER(TABLE_NAME) = LOWER('users')"
     );
-    //Condição para que a tabela 'users' seja criada
-    if (tableVerify.rows.length == 0) {
+
+    if (tableVerify.rows.length === 0) {
       await mainPool.query(createTBScript);
       console.info("Table created successfully");
     }
@@ -55,8 +55,7 @@ const startDatabase = async () => {
     console.error("Error", error);
   }
 };
-//Execução da funcão
+
 startDatabase();
 
-//exportando o metodo pool para fora do arquivo
 module.exports = { pool, startDatabase };
