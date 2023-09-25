@@ -5,10 +5,10 @@ require("dotenv").config({ debug: true });
 
 //Pool inicial
 const pool = new Pool({
-   user: process.env.BRIDGE_USER,
-   host: process.env.HOST,
+   user: process.env.BRIDGE_DB_USER,
+   host: process.env.DB_HOST,
    database: 'postgres',
-   password: process.env.BRIDGE_PASSWORD,
+   password: process.env.BRIDGE_DB_PASSWORD,
    port: process.env.PORT,
 });
 
@@ -36,10 +36,10 @@ const startDatabase = async () => {
     }
     //Pool principal, que se conecta ao banco de dados de usuários
     const mainPool = new Pool({
-      user: process.env.USER,
-      host: process.env.HOST,
-      database: process.env.NAME,
-      password: process.env.PASSWORD,
+      user: process.env.DB_USER,
+      host: process.env.DB_HOST,
+      database: process.env.DB_NAME,
+      password: process.env.DB_PASSWORD,
       port: process.env.PORT,
       });
     //Script de verificação da existencia da tabela 'users'
