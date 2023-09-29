@@ -3,11 +3,11 @@ const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 
 const pool = new Pool({
-  user: process.env.USER,
-  host: process.env.HOST,
-  database: process.env.DATABASE,
-  password: process.env.PASSWORD,
-  port: process.env.PORT,
+  user: "postgres",
+  password: "postgres",
+  host: "localhost",
+  port: 5432,
+  database: "db_login_system",
 });
 const loginUser = async (request, res) => {
   const { email, password } = request.body;

@@ -4,11 +4,11 @@ require("dotenv").config({ debug: true });
 
 // Pool inicial para a criação do banco de dados
 const pool = new Pool({
-   user: process.env.BRIDGE_USER,
-   host: process.env.HOST,
-   database: 'postgres',
-   password: process.env.BRIDGE_PASSWORD,
-   port: process.env.PORT,
+  user: "postgres",
+  password: "postgres",
+  host: "localhost",
+  port: 5432,
+  database: "postgres",
 });
 
 // Scripts do banco de dados
@@ -27,7 +27,7 @@ const startDatabase = async () => {
     let dataBaseVerify = await pool.query(
       "SELECT datname FROM pg_catalog.pg_database WHERE LOWER(pg_database.datname) = LOWER('db_login_system')"
     );
-    
+
     if (dataBaseVerify.rows.length === 0) {
       await pool.query(createDbScript);
       console.info("Database created successfully");
@@ -35,11 +35,11 @@ const startDatabase = async () => {
 
     // Pool principal, que se conecta ao banco de dados de usuários
     const mainPool = new Pool({
-      user: process.env.USER,
-      host: process.env.HOST,
-      database: process.env.NAME,
-      password: process.env.PASSWORD,
-      port: process.env.PORT,
+      user: "postgres",
+      password: "postgres",
+      host: "localhost",
+      port: 5432,
+      database: "db_login_system",
     });
 
     // Script de verificação da existência da tabela 'users'

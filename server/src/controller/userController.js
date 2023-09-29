@@ -4,11 +4,11 @@ const jwt = require("jsonwebtoken");
 
 //instanciando a classe pool com as configurações de conexão do banco de dados postgresql
 const pool = new Pool({
-  user: process.env.USER,
-  host: process.env.HOST,
-  database: process.env.DATABASE,
-  password: process.env.PASSWORD,
-  port: process.env.PORT,
+  user: "postgres",
+  password: "postgres",
+  host: "localhost",
+  port: 5432,
+  database: "db_login_system",
 });
 //Metodo para pegar todos os usuários do banco de dados
 const getUsers = async (request, res) => {
