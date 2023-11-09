@@ -1,25 +1,40 @@
+//##################################
+//            Variáveis
+//##################################
 const btn = document.getElementById("register-btn");
-const email = document.getElementById("email");
-const user_name = document.getElementById("name");
-const password = document.getElementById("password");
-const password_confirmation = document.getElementById("password-check");
+const registerForm = document.getElementById("register-form");
+const nameInput = document.getElementById("name");
+const emailInput = document.getElementById("email");
+const passwordInput = document.getElementById("password");
+const passwordConfirm = document.getElementById("#passsword-isEquals");
+const spans = document.querySelectorAll(".span-required");
 
-btn.addEventListener("click", (e) => {
+//##################################
+//         FUNÇOES E EVENTOS
+//##################################
+
+//Evento do botão que recupera os valores do formulário e envia para o banco de dados
+btn.addEventListener("click", function (e) {
   e.preventDefault();
 
-  if (password.value === password_confirmation.value) {
-    const data = {
-      email: email.value,
-      user_name: user_name.value,
-      password: password.value,
-      password_confirmation: password_confirmation.value,
-    };
-    console.log(data);
-  } else {
-    console.error("As senhas são diferentes");
-  }
-});
+  const data = {
+    email: emailInput.value,
+    name: nameInput.value,
+    password: passwordInput.value,
+  };
+  //Constante que armazena a função assincrona de fetch
+  const fetchAPI = async () => {
+    const result = await fetch("http://localhost:3000/auth/register", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data),
+    })
+      .then((response) => response.json())
+      .then((data) => console.log(data));
+  };
+  fetchAPI();
 
-fetch(){
-  
-}
+  //Execução do Fetch(Busca)
+});

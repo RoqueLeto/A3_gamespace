@@ -1,15 +1,18 @@
 const { Pool } = require("pg");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
+require("dotenv").config({ debug: true });
 
 //instanciando a classe pool com as configurações de conexão do banco de dados postgresql
 const pool = new Pool({
-  user: "postgres",
-  password: "postgres",
-  host: "localhost",
-  port: 5432,
-  database: "db_login_system",
+  user: process.env.USER,
+  password: process.env.PASSWORD,
+  host: process.env.HOST,
+  port: process.env.PORT,
+  database: process.env.DATABASE2,
 });
+
+console.log(process.env.DB_USER);
 //Metodo para pegar todos os usuários do banco de dados
 const getUsers = async (request, res) => {
   const response = await pool.query("SELECT * FROM users");

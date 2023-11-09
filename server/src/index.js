@@ -3,11 +3,12 @@ const cors = require("cors");
 const app = express();
 require("dotenv").config({ override: true });
 const startDatabase = require("./database/database");
-
+const createGamesTable = require("./database/gamesDatabase");
+const createGamespaceTable = require("./database/gamespaceDatabase");
 //middlewares - faz referencias a funcoes que são passadas antes da rota
+app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
-app.use(cors());
 
 //rotas
 app.use(require("./routes/routes"));
